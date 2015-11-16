@@ -1,0 +1,41 @@
+<?php
+
+function searchprofile_menu() {
+	$items = array();
+	$items['list'] = array(
+		'title' => 'searchprofile',
+		'description' => 'searchprofile',
+		'page callback' => 'get_search',
+		'access callback' => TRUE,
+		'access arguments' => array('access content'),
+	);
+	return $items;
+}
+
+function get_search() {
+	var_dump($GLOBALS['user']->uid);
+	//$types = profile2_get_types();	//gets all profile types
+	//$pr = profile2_load_by_user($GLOBALS['user']->uid, 'main');
+	$pr = profile2_load_by_user(3,'main');
+	var_dump($pr);
+}
+
+function searchprofile_views_query_alter(&$view, &$query) {
+	if ($view->name == 'profile_list') {
+		$logged_in = $GLOBALS['user']->uid;
+		$pr = profile2_load_by_user($logged_in,'main');
+
+		$join = new views_join();
+        $join->table = 'field_data_field_gender';
+        $join->field = 'entity_id';
+        $join->left_table = 'profile';
+        $join->left_field = 'pid';
+        $join->type = 'inner';
+
+        $query->add_relationship('field_data_field_gender', $join, 'profile');
+
+		$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], '='));
+
+		$view->query->add_where(0, db_and()->condition('profile.uid', $logged_in, '!='));
+	}
+}

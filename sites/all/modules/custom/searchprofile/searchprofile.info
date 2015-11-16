@@ -1,0 +1,4 @@
+name = searchprofile
+description = searchprofile
+core = 7.x
+package = Profile_List
