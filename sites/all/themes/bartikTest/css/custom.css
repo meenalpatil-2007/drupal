@@ -1,0 +1,17 @@
+.name_link{font-weight: bold;}
+
+.name_link:link {color:#ff0000;}
+.name_link:visited {color:#0000ff;}
+.name_link:hover {font-size:110%;font-weight: bold;}
+
+.dob_class{}
+
+.edu_class{}
+
+.abt_me_class{}
+
+.has-border div a img{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}

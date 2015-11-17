@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the m2serve_connector module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * This will automatically create 'm2serve' named endpoint on installation
+ *
+ * @ingroup m2serve_connector
+ */
+function m2serve_connector_install() {
+
+  module_load_include('inc', 'ctools', 'includes/export');
+  $endpoint = m2serve_connector_default_endpoint();
+  services_endpoint_save($endpoint);
+}
+
+/**
+ * Implements hook_enable().
+ *
+ * This will automatically expose all views as services
+ *
+ * @ingroup m2serve_connector
+ */
+function m2serve_connector_enable() {
+  module_load_include('inc', 'm2serve_connector', 'm2serve_connector.admin');
+  m2serve_connector_services_views_expose();
+}

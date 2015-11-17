@@ -1,0 +1,13 @@
+name = m2serve Services Views List 
+description = A Services resource for fetching list of views.
+package = Services
+core = 7.x
+dependencies[] = services
+dependencies[] = views
+
+; Information added by Drupal.org packaging script on 2013-12-12
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "m2serve connector"
+datestamp = "1386830606"
+

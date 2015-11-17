@@ -1,0 +1,23 @@
+name = M2Serve Connector
+description = Connects M2Serve studio with Drupal.
+package = M2Serve
+core = 7.x
+configure = admin/structure/m2serve-connector
+
+dependencies[] = ctools
+dependencies[] = services
+dependencies[] = rest_server
+dependencies[] = views
+dependencies[] = services_views
+dependencies[] = m2serve_services_views_list
+dependencies[] = mast
+dependencies[] = devel_generate
+
+files[] = m2serve_connector.test
+
+; Information added by Drupal.org packaging script on 2013-12-12
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "m2serve connector"
+datestamp = "1386830606"
+

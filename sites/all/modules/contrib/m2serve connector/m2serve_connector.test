@@ -1,0 +1,62 @@
+<?php
+/**
+ * @file
+ * Tests the functionality of the Simpletest example content type.
+ */
+
+class M2serveConnectorTestCase extends DrupalWebTestCase {
+  // Priviledged user attribute
+  // protected $privileged_user;
+  /**
+   * Implementation of getInfo.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Unit tests for m2serve_connector.module file',
+      'description' => 'These are the unit tests for the m2serve_connector.module file functions.',
+      'group' => 'm2serve',
+    );
+  }
+  /**
+   * Implementation of setUp.
+   */
+  public function setUp() {
+    parent::setUp(
+        'ctools',
+        'services',
+        'rest_server',
+        'm2serve_connector'
+    );
+    /*
+    // Create and login our privileged user.
+    $this->privilegedUser = $this->drupalCreateUser(array(
+    'administer services',
+    'administer site configuration',
+    ));
+    $this->drupalLogin($this->privilegedUser);
+    */
+  }
+
+  /**
+   * Test services_endpoint_new().
+   */
+  public function testM2serveConnector() {
+
+    $results = m2serve_connector();
+
+    $results_type = gettype($results);
+    $message = 'm2serve_connector() should return an array.';
+    $this->assertEqual($results_type, 'array', $message);
+
+    $string = 'm2serve connector array should have key ';
+    $this->assertTrue(array_key_exists('services', $results), t('@name services.', array('@name' => $string)));
+
+    $res_services = $results['services'];
+    // To get the type of the $res_services
+    // $res_services_type = gettype($res_services);
+    $message = 'm2serve_connector() result should service array.';
+    $this->assertEqual($res_services, 'array', $message);
+
+  }
+
+}

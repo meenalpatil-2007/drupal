@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Support for m2serve services views list.
+ */
+
+/**
+ * Implements hook_services_resources().
+ */
+function m2serve_services_views_list_services_resources() {
+  $search_resource = array(
+    'views_list' => array(
+      'retrieve' => array(
+        'file' => array(
+          'type' => 'inc',
+          'module' => 'm2serve_services_views_list',
+          'name' => 'm2serve_services_views_list.resource',
+        ),
+        'callback' => 'm2serve_services_views_list_resource',
+        'args' => array(
+          array(
+            'name' => 'key',
+            'optional' => TRUE,
+            'source' => array('path' => 0),
+            'description' => t('The search key.'),
+            'type' => 'string',
+          ),
+        ),
+        'access arguments' => array('administer site configuration'),
+        'access arguments append' => FALSE,
+      ),
+    ),
+  );
+
+  return $search_resource;
+}
