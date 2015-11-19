@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the profile_ty_2 feature.
+ */
+
+include_once 'profile_ty_2.features.inc';
