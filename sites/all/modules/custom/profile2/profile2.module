@@ -394,6 +394,8 @@ function profile2_form_user_register_form_alter(&$form, &$form_state) {
  * @see profile2_form_submit_handler()
  */
 function profile2_attach_form(&$form, &$form_state) {
+  //print_r($form);
+  //print_r($form_state);die;
   foreach ($form_state['profiles'] as $type => $profile) {
     $form['profile_' . $profile->type]['#tree'] = TRUE;
     $form['profile_' . $profile->type]['#parents'] = array('profile_' . $profile->type);
@@ -461,6 +463,7 @@ function profile2_form_submit_handler(&$form, &$form_state) {
  * @see profile2_attach_form()
  */
 function profile2_form_submit_build_profile(&$form, &$form_state) {
+  //die('fdfdff');
   foreach ($form_state['profiles'] as $type => $profile) {
     // @see entity_form_submit_build_entity()
     if (isset($form['profile_' . $type]['#entity_builders'])) {

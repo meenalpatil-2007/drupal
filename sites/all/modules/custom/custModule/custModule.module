@@ -1,0 +1,14 @@
+<?php
+
+function hook_init() {
+  // Since this file should only be loaded on the front page, it cannot be
+  // declared in the info file.
+  
+}
+
+function custModule_profile2_presave($profile) {
+  $heightInInches = explode(".", $profile->field_height['und'][0]['value']);
+  $heightInFoot = ($heightInInches[0]*12) + $heightInInches[1];
+  print_r($profile);
+    die('dffdfdf');
+}

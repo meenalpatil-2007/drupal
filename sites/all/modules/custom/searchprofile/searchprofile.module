@@ -21,6 +21,7 @@ function get_search() {
 }
 
 function searchprofile_views_query_alter(&$view, &$query) {
+
 	if ($view->name == 'profile_list') {
 		
 		list($logged_in, $pr, $join) = getJoinobj('field_data_field_gender');
@@ -33,22 +34,24 @@ function searchprofile_views_query_alter(&$view, &$query) {
 
 	if ($view->name == '_RecommendedMatches') {
 
-		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_partner_age', 'field_data_field_partner_height', 														'field_data_field_partner_education', 'field_data_field_gender']);
+		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_partner_age', 'field_data_field_partner_height', 														'field_data_field_partner_education', 'field_data_field_gender', 
+													'field_data_field_height']);
 
+		$partnerheightInRange = explode("-", $pr->field_partner_height['und']['0']['value']);
+		
         $query->add_relationship('field_data_field_partner_age', $join, 'profile');
         $query->add_relationship('field_data_field_partner_height', $join, 'profile');
+        $query->add_relationship('field_data_field_height', $join, 'profile');
         $query->add_relationship('field_data_field_partner_education', $join, 'profile');
         $query->add_relationship('field_data_field_gender', $join, 'profile');
-
 		$view->query->add_where(0, db_and()->condition('field_data_field_partner_age.field_partner_age_value', $pr->field_partner_age['und']['0']['value'], '='));
 
-		$view->query->add_where(0, db_and()->condition('field_data_field_partner_height.field_partner_height_value', $pr->field_partner_height['und']['0']['value'], '='));
-
-		$view->query->add_where(0, db_and()->condition('field_data_field_partner_education.field_partner_education_value', $pr->field_partner_education['und']['0']['value'], '='));
+		$view->query->add_where(0, db_and()
+      	->condition('field_data_field_height.field_height_value', $partnerheightInRange, 'BETWEEN'));
+      	//->condition('field_data_field_height.field_height_value', $partnerheightInRange[1], '<='));
+		
 
 		$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], '='));
-
-		$view->query->add_where(0, db_and()->condition('profile.uid', $logged_in, '!='));
 	}
 }
 
@@ -71,4 +74,3 @@ function getJoinobj($tableName) {
 
     return array($logged_in, $pr, $join);
 }
-
