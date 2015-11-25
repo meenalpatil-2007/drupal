@@ -34,23 +34,24 @@ function searchprofile_views_query_alter(&$view, &$query) {
 
 	if ($view->name == '_RecommendedMatches') {
 
-		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_partner_age', 'field_data_field_partner_height', 														'field_data_field_partner_education', 'field_data_field_gender', 
-													'field_data_field_height']);
+		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_partner_age', 'field_data_field_partner_height', 													    'field_data_field_gender', 
+													'field_data_field_height_inches']);
 
 		$partnerheightInRange = explode("-", $pr->field_partner_height['und']['0']['value']);
+		$heightInInches = convertFtTOInches($partnerheightInRange[0]) . "-". convertFtTOInches($partnerheightInRange[1]);
+		$newDate = Datetime::createFromFormat('Y-m-d H:i:s', $pr->field_birth_date['und']['0']['value'])->format('Y-m-d H:i:s');
+		$today   = new DateTime('today');
+		echo $today;die;
+		//$age = getAge($newDate);die;
 		
         $query->add_relationship('field_data_field_partner_age', $join, 'profile');
-        $query->add_relationship('field_data_field_partner_height', $join, 'profile');
-        $query->add_relationship('field_data_field_height', $join, 'profile');
-        $query->add_relationship('field_data_field_partner_education', $join, 'profile');
+        $query->add_relationship('field_data_field_height_inches', $join, 'profile');
         $query->add_relationship('field_data_field_gender', $join, 'profile');
 		$view->query->add_where(0, db_and()->condition('field_data_field_partner_age.field_partner_age_value', $pr->field_partner_age['und']['0']['value'], '='));
 
 		$view->query->add_where(0, db_and()
-      	->condition('field_data_field_height.field_height_value', $partnerheightInRange, 'BETWEEN'));
-      	//->condition('field_data_field_height.field_height_value', $partnerheightInRange[1], '<='));
+      	->condition('field_data_field_height_inches.field_height_inches_value', explode("-", $heightInInches), 'BETWEEN'));
 		
-
 		$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], '='));
 	}
 }
@@ -73,4 +74,24 @@ function getJoinobj($tableName) {
     $join->type = 'inner';
 
     return array($logged_in, $pr, $join);
+}
+
+function convertFtTOInches($height) {
+	$heightInFoot = explode(".", $height);
+	$heightInInches = ($heightInFoot[0]*12) + $heightInFoot[1];
+	return $heightInInches;
+}
+
+
+function getAge($dob="1970-01-01") 
+{ 
+    $dob=explode("-",$dob); 
+    print_r($dob);die;
+    echo $curMonth = date("m");die;
+    $curDay = date("j");
+    $curYear = date("Y");
+    $age = $curYear - $dob[0]; 
+    if($curMonth<$dob[1] || ($curMonth==$dob[1] && $curDay<$dob[2])) 
+            $age--; 
+    return $age; 
 }

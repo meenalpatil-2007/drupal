@@ -1,14 +1,26 @@
 <?php
 
-function hook_init() {
-  // Since this file should only be loaded on the front page, it cannot be
-  // declared in the info file.
-  
+function custModule_form_profile2_edit_main_form_alter(&$form, &$form_state) {
+  $form['profile_main']['field_height_inches']['und']['#access'] = 0;
+  return $form;
 }
 
+
 function custModule_profile2_presave($profile) {
-  $heightInInches = explode(".", $profile->field_height['und'][0]['value']);
-  $heightInFoot = ($heightInInches[0]*12) + $heightInInches[1];
-  print_r($profile);
-    die('dffdfdf');
+  //print_r($profile);die;
+  $height = $profile->field_height['und'][0]['value'];
+  $heightInFoot = explode(".", $height);
+  $heightInInches = ($heightInFoot[0]*12) + $heightInFoot[1];
+  $profile->field_height_inches['und'][0]['value'] = $heightInInches;
+}
+
+
+function convertTO($height, $feet=FALSE, $inches= FALSE) {
+if ($inches) {
+  $height = $height%12;
+}
+else {
+  $height = $height/12;
+}
+  return $height;
 }
