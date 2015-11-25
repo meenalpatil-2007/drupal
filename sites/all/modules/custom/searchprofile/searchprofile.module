@@ -21,6 +21,7 @@ function get_search() {
 }
 
 function searchprofile_views_query_alter(&$view, &$query) {
+
 	if ($view->name == 'profile_list') {
 		
 		list($logged_in, $pr, $join) = getJoinobj('field_data_field_gender');
@@ -29,6 +30,11 @@ function searchprofile_views_query_alter(&$view, &$query) {
 		$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], '='));
 
 		$view->query->add_where(0, db_and()->condition('profile.uid', $logged_in, '!='));
+	}
+
+	if($view->name == 'test3') {
+		list($logged_in, $pr, $join) = getJoinobj('field_data_field_gender');
+		$view->query->add_where(0, db_and()->condition('profile.uid', $logged_in, '!='));	
 	}
 
 	if ($view->name == '_RecommendedMatches') {
