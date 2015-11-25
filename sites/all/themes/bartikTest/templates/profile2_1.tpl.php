@@ -121,7 +121,7 @@ print render ($form['actions']);
 		<div class="col-sm-6 col-md-6 col-lg-6">
 			<b><?php print render($content['field_partner_height']['#title']);?></b>&nbsp;:&nbsp;<?php print render($content['field_partner_height'][0]['#markup']); ?></br>
 			<b><?php print render($content['field_partner_age']['#title']);?></b>&nbsp;:&nbsp;<?php print render($content['field_partner_age'][0]['#markup']); ?></br>
-			<b><?php print render($content['field_partner_age']['#title']);?></b>&nbsp;:&nbsp;<?php print render($content['field_partner_age'][0]['#markup']); ?>
+			<b><?php print render($content['field_partner_education']['#title']);?></b>&nbsp;:&nbsp;<?php print render($content['field_partner_education'][0]['#markup']); ?>
 		</div>
 		</div>
 
