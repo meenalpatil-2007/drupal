@@ -79,7 +79,12 @@ function getJoinobj($tableName) {
 }
 
 function convertFtTOInches($height) {
-	$heightInFoot = explode(".", $height);
-	$heightInInches = ($heightInFoot[0]*12) + $heightInFoot[1];
+	if (strpos($height, ".")) {
+		$heightInFoot = explode(".", $height);
+		$heightInInches = ($heightInFoot[0]*12) + $heightInFoot[1];
+	}else {
+		$heightInInches = ($height*12);
+	}
+	
 	return $heightInInches;
 }

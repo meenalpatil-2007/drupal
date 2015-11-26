@@ -46,11 +46,6 @@ bootstrap_include('bootstrap', 'includes/deprecated.inc');
  */
 function bootstrap_theme(&$existing, $type, $theme, $path) {
   bootstrap_include($theme, 'includes/registry.inc');
-  $items['profile2_edit_main'] = array(
-        'render element' => 'form',
-        'template' => 'field--field-content.tpl',
-        'path' => drupal_get_path('theme', 'bootstrap') . '/template/',
-    );
   return _bootstrap_theme($existing, $type, $theme, $path);
 }
 
