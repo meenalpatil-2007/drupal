@@ -24,23 +24,23 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/
 	<div class="test">
 		<?php foreach ($profiles as $profile) { ?>
 		  	<li  class="list-group-item text-left">
-		  	<?php if ($profile['field_profile_img']) 
-			    print $profile['field_profile_img'];
-			    else {
-			?>      			
+		  	    			
 		      	<a href="/profile-main/<?php echo $profile['uid']; ?>" class="name">
 			      	<?php 
+			      			if ($profile['field_profile_img'])  {
+			      				print $profile['field_profile_img'];
+			      			}
+						    else {
 			      		
-			      		
-				      		if (strtolower($profile['field_gender']) == 'male') {
-				      			?> <img  typeof="foaf:Image" class="img-responsive" width="80" height="80" src="http://drupal.dev/sites/all/themes/bootstrap/img/male.png" > <?php
-				      		}
-				      		else {
-				      			?> <img  typeof="foaf:Image" class="img-responsive" width="80" height="80" src="http://drupal.dev/sites/all/themes/bootstrap/img/female.jpg" > <?php
-				      		}
-				      		
-				      	}	
-			      		print $profile['field_first_name'] ." ". $profile['field_last_name'];
+					      		if (strtolower($profile['field_gender']) == 'male') {
+					      			?> <img  typeof="foaf:Image" class="img-responsive" width="80" height="80" src="http://drupal.dev/sites/all/themes/bootstrap/img/male.png" > <?php
+					      		}
+					      		else {
+					      			?> <img  typeof="foaf:Image" class="img-responsive" width="80" height="80" src="http://drupal.dev/sites/all/themes/bootstrap/img/female.jpg" > <?php
+					      		}
+					      		
+					      	}	
+			      			print $profile['field_first_name'] ." ". $profile['field_last_name'];
 				    ?>
 		      	</a>
 		      	
