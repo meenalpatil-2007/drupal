@@ -42,17 +42,19 @@ function searchprofile_views_query_alter(&$view, &$query) {
 		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_age','field_data_field_gender', 																'field_data_field_height_inches']);
 
 		$partnerheightInRange = explode("-", $pr->field_partner_height['und']['0']['value']);
-		$heightInInches = convertFtTOInches($partnerheightInRange[0]) . "-". convertFtTOInches($partnerheightInRange[1]);
+		$heightInInches[] = convertFtTOInches($partnerheightInRange[0]);
+		$heightInInches[] = convertFtTOInches($partnerheightInRange[1]);
 		
 		$ageRange = explode("-", $pr->field_partner_age['und']['0']['value']);
 		
         $query->add_relationship('field_data_field_age', $join, 'profile');
         $query->add_relationship('field_data_field_height_inches', $join, 'profile');
         $query->add_relationship('field_data_field_gender', $join, 'profile');
+
 		$view->query->add_where(0, db_and()->condition('field_data_field_age.field_age_value', $ageRange, 'BETWEEN'));
 
 		$view->query->add_where(0, db_and()
-      	->condition('field_data_field_height_inches.field_height_inches_value', explode("-", $heightInInches), 'BETWEEN'));
+      	->condition('field_data_field_height_inches.field_height_inches_value', $heightInInches, 'BETWEEN'));
 		
 		$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], '='));
 	}
@@ -69,20 +71,21 @@ function getJoinobj($tableName) {
 	else {
 		$join->table = $tableName;
 	}
-	
-    $join->field = 'entity_id';
-    $join->left_table = 'profile';
-    $join->left_field = 'pid';
-    $join->type = 'inner';
 
-    return array($logged_in, $pr, $join);
+	$join->field = 'entity_id';
+	$join->left_table = 'profile';
+	$join->left_field = 'pid';
+	$join->type = 'inner';
+
+	return array($logged_in, $pr, $join);
 }
 
 function convertFtTOInches($height) {
 	if (strpos($height, ".")) {
 		$heightInFoot = explode(".", $height);
 		$heightInInches = ($heightInFoot[0]*12) + $heightInFoot[1];
-	}else {
+	}
+	else {
 		$heightInInches = ($height*12);
 	}
 	

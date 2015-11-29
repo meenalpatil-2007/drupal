@@ -1,0 +1,114 @@
+.list-content{
+padding-top: 70px;
+margin:0 20px 0 20px;
+color:#5bc0de;
+}
+
+.list-content .list-group .title{
+  background:#5bc0de;
+  border:2px solid #DDDDDD;
+  font-weight:bold;
+  color:#FFFFFF;
+  text-align: center;
+  overflow: hidden;
+}
+
+.test{
+    max-height:275px;
+    overflow-y:scroll;
+}
+
+.list-group-item {
+background-color:transparent;
+}
+
+.list-group-item img {
+    height:80px; 
+    width:80px;
+    overflow:hidden;
+    border-radius:60%;
+}
+.bg {
+    background:rgba(5, 5, 5, 0.1);
+
+}
+.jumbotron .btn {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+.prj-name {
+    color:#5bc0de;    
+}
+.break{
+    width:100%;
+    margin:20px;
+}
+
+.heart-divider {
+    text-align: center;
+}
+.grey-line {
+    width: 30px;
+    height: 8px;
+    display: inline-block;
+    border-top: solid 2px #e1dddd;
+}
+.pink-heart {
+    color:#c32143;
+    font-size: 18px;
+    position: relative;
+    z-index: 3;
+}
+.grey-heart {
+    color: #e1dddd;
+    font-size: 18px;
+    margin-left: -15px;
+    position: relative;
+    z-index: 2;
+}
+.grey-line {
+    width: 30px;
+    height: 8px;
+    display: inline-block;
+    border-top: solid 2px #e1dddd;
+}
+
+div.ext-box { 
+    display: table; 
+    margin-top: 5px;
+    margin-left:15px;
+}
+div.int-box { 
+    display: table-cell; 
+    
+    padding-left:5px;
+}
+
+.list-content li {
+    -webkit-box-shadow: 0 10px 10px #b0b0b0;
+       -moz-box-shadow: 0 10px 10px #b0b0b0;
+         -o-box-shadow: 0 10px 10px #b0b0b0;
+            box-shadow: 0 10px 10px #b0b0b0;
+}
+
+
+.glyphicon-refresh-animate {
+    -animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-webkit-keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+img {
+    pointer-events: none;
+}
+
+.test::-webkit-scrollbar { width: 0 !important }

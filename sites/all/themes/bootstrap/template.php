@@ -49,6 +49,11 @@ function bootstrap_theme(&$existing, $type, $theme, $path) {
   return _bootstrap_theme($existing, $type, $theme, $path);
 }
 
+function bootstrap_preprocess_views_view(&$vars) {
+    if (isset($vars['view']->name) && $vars['view']->name == '_RecommendedMatches') {
+    }
+}
+
 /**
  * Clear any previously set element_info() static cache.
  *
