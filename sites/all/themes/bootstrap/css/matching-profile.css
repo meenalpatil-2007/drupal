@@ -1,7 +1,11 @@
 .list-content{
-padding-top: 70px;
-margin:0 20px 0 20px;
+width:100%;
 color:#5bc0de;
+}
+
+a:hover, a:visited, a:link, a:active {
+    color:#5bc0de;    
+    text-decoration: none;
 }
 
 .list-content .list-group .title{
@@ -84,7 +88,7 @@ div.int-box {
     padding-left:5px;
 }
 
-.list-content li {
+.views-exposed-form, .list-content li {
     -webkit-box-shadow: 0 10px 10px #b0b0b0;
        -moz-box-shadow: 0 10px 10px #b0b0b0;
          -o-box-shadow: 0 10px 10px #b0b0b0;
@@ -112,3 +116,23 @@ img {
 }
 
 .test::-webkit-scrollbar { width: 0 !important }
+
+.views-exposed-form {
+    color:#5bc0de;
+    position:relative;
+    padding: 10px 15px;
+    background-color: #fff;
+    width:100%;
+    top:400px;
+}
+
+#edit-submit-recommendedmatches {
+    color:#fff;
+    background-color: #5bc0de;
+}
+
+#block-views-recommendedmatches-block{
+    margin-top:1px;
+}
+
+
