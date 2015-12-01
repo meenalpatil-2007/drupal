@@ -23,7 +23,7 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/
 	</li>
 	<div class="test" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
 		<?php foreach ($profiles as $profile) { ?>
-		  	<li  class="list-group-item text-left col-sm-6 col-md-4 col-lg-4">
+		  	<li  class="list-group-item text-left <?php echo count($profiles) >= 3 ? 'col-sm-6 col-md-4 col-lg-4' : 'col-sm-6 col-md-6 col-lg-6'; ?>">
 		  	<?php if ($profile['field_profile_img']) print $profile['field_profile_img'];    			
 		      	else { ?>      			
 		      	<a href="/profile-main/<?php echo $profile['uid']; ?>" class="name">
