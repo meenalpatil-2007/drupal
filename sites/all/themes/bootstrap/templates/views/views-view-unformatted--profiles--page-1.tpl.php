@@ -23,7 +23,7 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/
 	</li>
 	<div class="test">
 		<?php foreach ($profiles as $profile) { ?>
-		  	<li  class="list-group-item text-left">
+		  	<li  class="list-group-item text-left col-sm-6 col-md-4 col-lg-4">
 		  	<?php if ($profile['field_profile_img']) 
 			    print $profile['field_profile_img'];
 			    else { ?>      			
