@@ -126,7 +126,7 @@ img {
     top:400px;
 }
 
-#edit-submit-recommendedmatches {
+.views-submit-button button {
     color:#fff;
     background-color: #5bc0de;
 }

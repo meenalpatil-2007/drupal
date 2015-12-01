@@ -29,10 +29,9 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/
 			    else { ?>      			
 		      	<a href="/profile-main/<?php echo $profile['uid']; ?>" class="name">
 			      	<img  typeof="foaf:Image" class="img-responsive" width="80" height="80" src="http://drupal.dev/sites/all/themes/bootstrap/img/<?php print strtolower($profile['field_gender']); ?>.png" > <?php
-				    print $profile['field_first_name'] ." ". $profile['field_last_name'];
 				} ?>
 		      	</a>
-		      	
+		      	<?php print $profile['field_last_name']; ?>
 		      	<div class="subtitle-small ext-box glyphicon glyphicon-envelope "><div class="int-box"><?php print $profile['mail']; ?></div></div>
 		      	<div class="subtitle-small ext-box glyphicon glyphicon-registration-mark"><div class="int-box"><?php print $profile['field_religion']; ?></div></div>
 				<div class="subtitle-small ext-box glyphicon glyphicon-search "><div class="int-box"><?php print $profile['field_looking_for']; ?></div></div>

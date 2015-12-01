@@ -28,7 +28,6 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/
 		      	else { ?>      			
 		      	<a href="/profile-main/<?php echo $profile['uid']; ?>" class="name">
 			      	<img  typeof="foaf:Image" class="img-responsive" width="80" height="80" src="http://drupal.dev/sites/all/themes/bootstrap/img/<?php print strtolower($profile['field_gender']); ?>.png" > <?php
-				    print $profile['field_first_name'] ." ". $profile['field_last_name'];
 				} ?>
 		      	</a>
 		      	<?php print $profile['field_first_name']; ?>

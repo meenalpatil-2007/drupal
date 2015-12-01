@@ -61,10 +61,19 @@ function searchprofile_views_query_alter(&$view, &$query) {
 }
 
 function searchprofile_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if($form['#id'] == 'views-exposed-form--RecommendedMatches-block') {
+  if($form['#id'] == 'views-exposed-form--RecommendedMatches-block' 
+  	|| $form['#id'] == 'views-exposed-form-profiles-page-1') {
     unset($form['sort_by']);
   }
 
+}
+
+function searchprofile_views_pre_render(&$view) {
+  if ($view->name == '_RecommendedMatches' && $view->current_display == 'block') {
+    if (empty($view->result) && empty($view->exposed_input)) {
+      $view->exposed_widgets = NULL;
+    }
+  }
 }
 
 function getJoinobj($tableName) {
