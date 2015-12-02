@@ -14,12 +14,11 @@ a:hover, a:visited, a:link, a:active {
   font-weight:bold;
   color:#FFFFFF;
   text-align: center;
-  overflow: hidden;
 }
 
 .test{
     max-height:275px;
-    overflow-y:scroll;
+    overflow: hidden;
 }
 
 .list-group-item {
