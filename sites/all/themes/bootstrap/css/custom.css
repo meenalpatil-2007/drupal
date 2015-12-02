@@ -1,3 +1,5 @@
+@import url("http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/font-awesome.min.css");
+
 .name_link{font-weight: bold;}
 
 .name_link:link {color:#ff0000;}
@@ -18,4 +20,17 @@
 
 .custom_hidden {
 	display: none;
+}
+
+.footer {
+	width:100%;
+	background:#333;
+	margin-top: 70px;
+	color:#fff;
+}
+
+#bottom {
+top: 0px;
+width: 100%;
+color: #fff;
 }

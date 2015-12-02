@@ -8,7 +8,6 @@
  */
 $profiles = $view->style_plugin->rendered_fields;
 drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/css/matching-profile.css', array('group' => CSS_THEME, 'type' => 'external'));
-drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/font-awesome.min.css', array('group' => CSS_THEME, 'type' => 'external'));
 ?>
 <div class="list-content">
 <ul class="list-group">

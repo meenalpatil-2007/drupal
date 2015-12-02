@@ -22,7 +22,7 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .list-group-item {
-background-color:transparent;
+    background-color:transparent;
 }
 
 .list-group-item img {
@@ -39,9 +39,7 @@ background-color:transparent;
     padding: 5px 5px !important;
     font-size: 12px !important;
 }
-.prj-name {
-    color:#5bc0de;    
-}
+
 .break{
     width:100%;
     margin:20px;
