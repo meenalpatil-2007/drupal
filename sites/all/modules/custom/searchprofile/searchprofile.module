@@ -37,10 +37,9 @@ function searchprofile_views_query_alter(&$view, &$query) {
 		$view->query->add_where(0, db_and()->condition('profile.uid', $logged_in, '!='));	
 	}
 
-
 	if ($view->name == '_RecommendedMatches') {
 
-		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_age','field_data_field_gender', 																'field_data_field_height_inches']);
+		list($logged_in, $pr, $join) = getJoinobj(['field_data_field_age','field_data_field_height_inches']);
 		if (empty($pr)) return;
 
 		$partnerheightInRange = explode("-", $pr->field_partner_height['und']['0']['value']);
@@ -51,14 +50,12 @@ function searchprofile_views_query_alter(&$view, &$query) {
 		
         $query->add_relationship('field_data_field_age', $join, 'profile');
         $query->add_relationship('field_data_field_height_inches', $join, 'profile');
-        $query->add_relationship('field_data_field_gender', $join, 'profile');
+        //$query->add_relationship('field_data_field_gender', $join, 'profile');
 
-		$view->query->add_where(0, db_and()->condition('field_data_field_age.field_age_value', $ageRange, 'BETWEEN'));
+		$view->query->add_where(0, db_and()->condition('field_data_field_age.field_age_value', $ageRange, 'BETWEEN')
+			->condition('field_data_field_height_inches.field_height_inches_value', $heightInInches, 'BETWEEN'));
 
-		$view->query->add_where(0, db_and()
-      	->condition('field_data_field_height_inches.field_height_inches_value', $heightInInches, 'BETWEEN'));
-		
-		$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], '='));
+		//$view->query->add_where(0, db_and()->condition('field_data_field_gender.field_gender_value', $pr->field_looking_for['und']['0']['value'], 'IS NOT NULL'));
 	}
 }
 
