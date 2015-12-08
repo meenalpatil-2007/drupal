@@ -60,15 +60,18 @@ function searchprofile_views_query_alter(&$view, &$query) {
 }
 
 function searchprofile_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if($form['#id'] == 'views-exposed-form--RecommendedMatches-block' 
-  	|| $form['#id'] == 'views-exposed-form-profiles-page-1') {
-    unset($form['sort_by']);
-  }
+  	if($form['#id'] == 'views-exposed-form--RecommendedMatches-block' 
+  		|| $form['#id'] == 'views-exposed-form-profiles-page-1') {
+    	unset($form['sort_by']);
+      	// Hide 'results per page' when the view has no results.
+      	$form['items_per_page']['#access'] = FALSE;
+  	}
 
 }
 
 function searchprofile_views_pre_render(&$view) {
-  if ($view->name == '_RecommendedMatches' && $view->current_display == 'block') {
+  if ($view->name == '_RecommendedMatches' && $view->current_display == 'block'
+  	|| $view->name == 'profiles' && $view->current_display == 'page_1') {
     if (empty($view->result) && empty($view->exposed_input)) {
       $view->exposed_widgets = NULL;
     }

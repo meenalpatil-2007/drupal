@@ -20,7 +20,7 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/css/matching-profil
 			<span class="grey-line"></span>
 		</div>
 	</li>
-	<div class="test" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+	<div class="test">
 		<?php foreach ($profiles as $profile) { ?>
 		  	<li  class="list-group-item text-left <?php echo count($profiles) >= 4 ? 'col-sm-6 col-md-3 col-lg-3' : 'col-sm-6 col-md-6 col-lg-6'; ?>">
 		  	<?php if ($profile['field_profile_img']) print $profile['field_profile_img'];    			
