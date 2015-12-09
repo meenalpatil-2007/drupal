@@ -43,8 +43,8 @@
       <?php 
         $tmp = explode("<ul><li>", $elements['links']['#children']);
         $tmp1 = explode("</li>", $tmp[1]);
-        print '<div class="links wow fadeInUp btn btn-lg btn-primary btn-block" data-wow-delay="1.5s">'.  $tmp1[0].'</div>';
-        print '<div class="wow fadeInUp btn btn-lg btn-primary btn-block" data-wow-delay="1.5s">'.  $tmp1[1].'</div>';
+        //print '<div class="links wow fadeInUp btn btn-lg btn-primary btn-block" data-wow-delay="1.5s">'.  $tmp1[0].'</div>';
+        print '<div class="links wow fadeInUp btn btn-lg btn-primary btn-block" data-wow-delay="1.5s">'.  $tmp1[1].'</div>';
 
         //echo '<div class="btn btn-lg btn-primary">'.$tmp[0].'</div>';
       ?>

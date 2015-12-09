@@ -58,8 +58,51 @@ ul, li
     list-style-type: none;
 }
 .links {
-    margin-top:20px;
+    margin-top:3px;
 }
-a {
+.links a {
     color:#fff !Important;
+}
+
+
+
+#hero-area {
+  background: url(../img/backgrounds/shaadi-bg.jpg)  no-repeat center; 
+  background-size: cover;
+  color: #fff;
+  height: 100%;
+  position: relative;
+  margin-top: 26px;
+}
+
+
+
+#hero-area .btn {
+  margin-right: 20px;
+}
+#hero-area img {
+  max-width: 100%;
+  max-height: 100%;
+}
+#hero-area  p {
+  padding: 50px 0;
+}
+#hero-area .row, #myModal {
+  padding: 134px 0;
+}
+.hero-inner {
+  position: relative;
+  color: #fff;
+  height: 100%;
+
+}
+.hero-inner:before {
+  background-color: rgba(52, 122, 250, 0.5);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  content: "";
+  display: block;
+
 }

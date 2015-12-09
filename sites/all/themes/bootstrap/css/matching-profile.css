@@ -1,6 +1,15 @@
+.row{
+    padding: 0!important;
+    margin-top: -30px;
+}
+#bottom .row{
+    padding:60px !important;
+}
+
 .list-content{
 width:100%;
 color:#5bc0de;
+padding-bottom: 80px;
 }
 
 a:hover, a:visited, a:link, a:active {
@@ -17,7 +26,7 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .test{
-    max-height:275px;
+    max-height:297px;
     overflow: hidden;
 }
 
@@ -114,9 +123,9 @@ img {
     color:#5bc0de;
     position:relative;
     padding: 10px 15px;
-    background-color: #fff;
     width:100%;
-    top:400px;
+    background-color: #fff;
+    top:440px;
 }
 
 #block-views-recommendedmatches-block{
