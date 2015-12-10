@@ -29,7 +29,7 @@
  */
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
+<?php //print_r($content); ?>
   <?php  if (!$page): ?>
     <h2<?php print $title_attributes; ?>>
         <a href="<?php print $url; ?>"><?php print $title; ?></a>
@@ -37,8 +37,7 @@
   <?php endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
-    <?php	    ?>
-	
+
 	<div id="userprofile-form">
 <div class="row">
 
@@ -55,8 +54,12 @@ print render ($form['actions']);
 */
 ?>
 <div class="col-sm-12 col-md-12 col-lg-12">
+
+<?php if(!empty($content['field_first_name'])){  ?>
 	<div class="panel panel-default">
 		<div class="panel-heading">Profile Details</div>
+		
+		
 			<div class="panel-body">
 			<div class="col-sm-6 col-md-6 col-lg-6">
 				<div id="img_box" class="img-responsive">
@@ -127,6 +130,15 @@ print render ($form['actions']);
 		</div>
 
 	</div>
+ <?php	 }
+ else{
+	 
+	 echo $content['empty']['#markup'];
+	 
+ }
+ 
+ 
+ ?>
 </div>
 </div>
 </div>
