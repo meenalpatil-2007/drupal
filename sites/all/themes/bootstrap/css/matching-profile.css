@@ -122,10 +122,15 @@ img {
 .views-exposed-form {
     color:#5bc0de;
     position:relative;
-    padding: 10px 15px;
+    padding: 0px 15px;
     width:100%;
     background-color: #fff;
-    top:440px;
+    top:418px;
+}
+
+.views-exposed-form .views-exposed-widget .btn{
+    margin-bottom: 11px;
+    margin-top: 0px !important;
 }
 
 #block-views-recommendedmatches-block{
