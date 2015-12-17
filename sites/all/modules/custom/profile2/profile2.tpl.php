@@ -63,8 +63,8 @@ print render ($form['actions']);
 			<div class="panel-body">
 			<div class="col-sm-6 col-md-6 col-lg-6">
 				<div id="img_box" class="img-responsive">
-				<img src="http://drupal.dev/sites/default/files/<?php echo $content['field_profile_img'][0]["#item"]["filename"]; ?>" class="img-responsive" width="150px"
-					<?php //print render($content['field_profile_img']); //var_dump($content['field_profile_img'][0]["#item"]["filename"]);exit;?>							
+				<!--<img src="http://drupal.dev/sites/default/files/<?php //echo $content['field_profile_img'][0]["#item"]["filename"]; ?>" class="img-responsive" width="150px"/>-->
+					<?php print render($content['field_profile_img']); //var_dump($content['field_profile_img'][0]["#item"]["filename"]);exit;?>							
 				</div>
 			</div>
 			<div class="col-sm-6 col-md-6 col-lg-6">			
