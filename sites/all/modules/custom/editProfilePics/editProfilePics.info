@@ -1,0 +1,5 @@
+name=editProfilePics
+description = to edit user profile gallery
+core = 7.x
+
+dependencies[] = services

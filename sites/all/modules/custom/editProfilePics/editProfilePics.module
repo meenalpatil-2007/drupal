@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * Implements of hook_services_resources().
+ */
+function editProfilePics_services_resources() {
+	
+  $definition = array(
+    'editProfilePics' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieve a editProfilePics',
+          'callback' => '_editProfilePics_resource_retrieve',
+          'access callback' => '_editProfilePics_resource_access',
+          'access arguments' => array('view'),
+          'access arguments append' => TRUE,
+          'args' => array(
+            array(
+              'name' => 'profile',
+              'type' => 'array',
+              'description' => 'The uid of the editProfilePics to retrieve.',
+              'source' => array('path' => 0),
+              'optional' => FALSE,
+            ),
+          ),
+        ),
+
+        'create' => array(
+          'help' => 'Create a editProfilePics',
+          'callback' => '_editProfilePics_resource_create',
+          'access callback' => '_editProfilePics_resource_access',
+          'access arguments' => array('create'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'account',
+              'type' => 'array',
+              'description' => 'The editProfilePics object',
+              'source' => 'data',
+              'optional' => FALSE,
+            ),
+          ),
+        ),
+		
+      ),     
+    ),
+  );
+
+  return $definition;
+	
+}
+
+function _editProfilePics_resource_retrieve($uid){
+	//print_r($_REQUEST);
+	return $res = _editProfilePics_resource_delete($_REQUEST['uid']);
+	 
+}
+
+function _editProfilePics_resource_access(){
+	return true;
+}
+
+function _editProfilePics_resource_delete($uid){
+
+	//print_r($_REQUEST);
+	//echo $uid; exit;	
+		
+	$query = db_update('users')->fields(array('status' => 0))->condition('uid', $uid, '=')->execute();
+	$result = db_truncate('cache_field')->execute();
+	
+	if($query){
+		$response['msg'] = 'Profile deleted successfully';			
+		db_cache_clear_all();		
+		$respo = json_encode($response);
+		return $respo;
+	}
+		
+}
+
+
+function _editProfilePics_resource_create($arg1){
+	
+	$result = get_pid($arg1['uid']);
+	$data = $arg1;
+	//print_r($arg1);
+	unset($data['uid']);
+	unset($data['field__token']);
+	//unset($data['field_profile_img']);
+	//print_r($data);
+	if($result['pid']){
+		
+		foreach($data as $key=>$value){
+			
+			$table = 'field_data_'.$key;
+			$field = $key.'_value';
+			$pid = $result['pid'];
+			
+			if($field == 'field_birth_date_value'){				
+				$value = date('Y-m-d H:i:s', strtotime($value));
+				//echo $value;exit;
+			}
+			
+			//echo $table ." ". $field ." ". $value. '<br/>';
+			
+			$sql = db_update($table)->fields(array($field => $value))->condition('entity_id', $pid, '=')->condition('revision_id', $pid, '=')->execute();
+			///echo $sql;
+			if($sql){
+				$table = 'field_revision_'.$key;
+				$sql1 = db_update($table)->fields(array($field => $value))->condition('entity_id', $pid, '=')->condition('revision_id', $pid, '=')->execute(); 		
+				$result = db_truncate('cache_field')->execute();				
+			}
+			
+			//echo $sql1; 		
+		} 	//exit; 
+		
+		$response = array('msg' => 'Profile updated successfully', 'pid' => $pid);
+
+	}else{
+		
+		$res = create_profile($arg1['uid']);
+		if($res){
+			$pData = get_pid($arg1['uid']);
+		}
+		$pid = $pData['pid'];
+		foreach ($data as $key=>$value){
+						
+			$table = 'field_data_'.$key;
+			$field = $key.'_value';
+			if($field == 'field_birth_date_value'){
+				$date = date_create($value);
+				$value = date_format($date, 'Y-m-d H:i:s');
+			}
+			
+			$con = db_insert($table)->fields(array(			
+						'entity_type' => 'profile2',
+						'bundle' => 'main',
+						'deleted' => 0,
+						'entity_id' =>	$pid,
+						'revision_id' => $pid,
+						'language' => 'und',
+						'delta' => 0,
+						$field => $value,			
+					))->execute();
+					
+			//if(!$con){
+				
+				$table = 'field_revision_'.$key;
+				$con1 = db_insert($table)->fields(array(			
+						'entity_type' => 'profile2',
+						'bundle' => 'main',
+						'deleted' => 0,
+						'entity_id' => $pid,
+						'revision_id' => $pid,
+						'language' => 'und',
+						'delta' => 0,
+						$field => $value,			
+					))->execute();
+					$result = db_truncate('cache_field')->execute();
+			//}
+		
+		}
+		
+		$response = array('msg' => 'Profile added successfully', 'pid' => $pid);
+	}
+	db_cache_clear_all();
+	
+	$respo = json_encode($response);
+	return $respo;
+}
+
+
+
+?>

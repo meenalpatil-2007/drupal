@@ -9,7 +9,7 @@ function editProfile_services_resources() {
     'editProfile' => array(
       'operations' => array(
         'retrieve' => array(
-          'help' => 'Retrieve a editProfile',
+          'help' => 'Retrieve a editProfile gallery',
           'callback' => '_editProfile_resource_retrieve',
           'access callback' => '_editProfile_resource_access',
           'access arguments' => array('view'),
@@ -109,8 +109,7 @@ function editProfile_services_resources() {
 	
 }
 
-function _editProfile_resource_retrieve($uid){
-	//print_r($_REQUEST);
+function _editProfile_resource_retrieve($uid){	
 	return $res = _editProfile_resource_delete($_REQUEST['uid']);
 	 
 }
@@ -121,9 +120,6 @@ function _editProfile_resource_access(){
 
 function _editProfile_resource_delete($uid){
 
-	//print_r($_REQUEST);
-	//echo $uid; exit;	
-		
 	$query = db_update('users')->fields(array('status' => 0))->condition('uid', $uid, '=')->execute();
 	$result = db_truncate('cache_field')->execute();
 	
@@ -141,7 +137,6 @@ function _editProfile_resource_create($arg1){
 	
 	$result = get_pid($arg1['uid']);
 	$data = $arg1;
-	//print_r($arg1);
 	unset($data['uid']);
 	unset($data['field__token']);
 	//unset($data['field_profile_img']);
@@ -154,19 +149,33 @@ function _editProfile_resource_create($arg1){
 			$field = $key.'_value';
 			$pid = $result['pid'];
 			
-			if($field == 'field_birth_date_value'){				
-				$value = date('Y-m-d H:i:s', strtotime($value));
+			if($field == 'field_birth_date_value'){		
+				$date = date_create($value);
+				$value = date_format($date, 'Y-m-d H:i:s');
+				//$value = date('Y-m-d H:i:s', strtotime($value));
 				//echo $value;exit;
 			}
 			
 			//echo $table ." ". $field ." ". $value. '<br/>';
 			
-			$sql = db_update($table)->fields(array($field => $value))->condition('entity_id', $pid, '=')->condition('revision_id', $pid, '=')->execute();
-			///echo $sql;
+			$sql = db_update($table)
+				->fields(array($field => $value))
+				->condition('entity_id', $pid, '=')
+				->condition('revision_id', $pid, '=')
+				->execute();
+				
+			//echo $sql;
+			
 			if($sql){
-				$table = 'field_revision_'.$key;
-				$sql1 = db_update($table)->fields(array($field => $value))->condition('entity_id', $pid, '=')->condition('revision_id', $pid, '=')->execute(); 		
-				$result = db_truncate('cache_field')->execute();				
+				$table = 'field_revision_'.$key;	
+				
+				$sql1 = db_update($table)
+					->fields(array($field => $value))
+					->condition('entity_id', $pid, '=')
+					->condition('revision_id', $pid, '=')
+					->execute(); 	
+					
+				$result1 = db_truncate('cache_field')->execute();				
 			}
 			
 			//echo $sql1; 		
@@ -214,7 +223,7 @@ function _editProfile_resource_create($arg1){
 						'delta' => 0,
 						$field => $value,			
 					))->execute();
-					$result = db_truncate('cache_field')->execute();
+					$result2 = db_truncate('cache_field')->execute();
 			//}
 		
 		}
