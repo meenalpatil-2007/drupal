@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function expressInterest_schema() {
+  $schema = array();
+  
+  $schema['express_interest'] = array(
+    'description' => 'The base table for Express Interest.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for Express Interest.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The current uid.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'interest_to_uid' => array(
+        'description' => 'The {users} uid to whom interest is expressed.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the node is published (visible to non-administrators).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the node was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the node was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    
+    'unique keys' => array(
+      'id' => array('id'),
+    ),
+    'foreign keys' => array(
+      'user' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),    
+      'express_interest' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  
+  return $schema;
+  
+  }
+  
+  ?>

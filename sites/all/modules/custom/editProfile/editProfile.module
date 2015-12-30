@@ -124,7 +124,7 @@ function _editProfile_resource_delete($uid){
 	$result = db_truncate('cache_field')->execute();
 	
 	if($query){
-		$response['msg'] = 'Profile deleted successfully';			
+		$response['msg'] = 'Profile deactivated successfully';			
 		db_cache_clear_all();		
 		$respo = json_encode($response);
 		return $respo;
