@@ -1,7 +1,7 @@
 <?php
     
-    drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/css/animate.css', array('group' => CSS_THEME, 'type' => 'external'));
-    drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/css/signin.css', array('group' => CSS_THEME, 'type' => 'external'));
+    drupal_add_css(base_path(). 'sites/all/themes/bootstrap/css/animate.css', array('group' => CSS_THEME, 'type' => 'external'));
+    drupal_add_css(base_path(). 'sites/all/themes/bootstrap/css/signin.css', array('group' => CSS_THEME, 'type' => 'external'));
 
     $elements = drupal_get_form('user_login_block');
 

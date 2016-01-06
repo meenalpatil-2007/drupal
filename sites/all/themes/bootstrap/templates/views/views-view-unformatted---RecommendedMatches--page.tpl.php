@@ -7,8 +7,8 @@
  * @ingroup views_templates
  */
 $profiles = $view->style_plugin->rendered_fields;
-drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/css/matching-profile.css', array('group' => CSS_THEME, 'type' => 'external'));
-drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/font-awesome.min.css', array('group' => CSS_THEME, 'type' => 'external'));
+drupal_add_css('sites/all/themes/bootstrap/css/matching-profile.css', array('group' => CSS_THEME, 'type' => 'external'));
+drupal_add_css('sites/all/themes/bootstrap/fonts/font-awesome/font-awesome.min.css', array('group' => CSS_THEME, 'type' => 'external'));
 ?>
 <div class="list-content">
 <ul class="list-group">
@@ -24,7 +24,7 @@ drupal_add_css('http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/
 	<div class="test">
 		<?php foreach ($profiles as $profile) { ?>
 		  	<li  class="list-group-item text-left">
-		  	    <a href="/profile-main/<?php echo $profile['uid']; ?>" class="name">
+		  	    <a href="/profile-main/" class="name">
 			      	<?php 
 		      			if ($profile['field_profile_img']) {
 						    	print $profile['field_profile_img'];

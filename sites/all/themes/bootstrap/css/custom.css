@@ -1,4 +1,5 @@
-@import url("http://drupal.dev/sites/all/themes/bootstrap/fonts/font-awesome/font-awesome.min.css");
+@import url("../fonts/font-awesome/font-awesome.min.css");
+
 
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 body {
